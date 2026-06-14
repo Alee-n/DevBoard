@@ -1,29 +1,72 @@
 # DevBoard
 
-A React + TypeScript productivity dashboard built while learning modern frontend development and preparing for the HENNGE Global Internship.
+Developer Learning Dashboard built with React and TypeScript.
+
+## Overview
+
+DevBoard is a productivity and learning dashboard designed to help developers track their learning progress, projects, and goals.
+
+The project was built while preparing for software engineering internships and focuses on modern frontend development practices.
 
 ## Features
 
-* Dashboard
-* Profile Page
+* Dashboard Overview
+* Learning Progress Tracker
 * Task Manager
-* Users Page
-* React Router Navigation
-* TypeScript Interfaces
+* Project Portfolio Page
+* Developer Profile
+* Progress Bars
 * Local Storage Persistence
-* Reusable Components
+* Dark Mode
+* Responsive Navigation
 
 ## Tech Stack
+
+### Frontend
+
+* React
+* TypeScript
+* Vite
+* CSS
+
+### Concepts Practiced
+
+* Components
+* Props
+* State Management
+* useEffect
+* Routing
+* Local Storage
+* Reusable UI Components
+
+## Projects Included
+
+### FocusFlow
+
+AI-powered productivity planner built with:
+
+* Flask
+* PostgreSQL
+* JWT Authentication
+* Docker
+* Pytest
+
+### DevBoard
+
+Developer learning dashboard built with:
 
 * React
 * TypeScript
 * Vite
 
-## Learning Objectives
+## Future Improvements
 
-* React Fundamentals
-* TypeScript
-* Component Architecture
-* State Management
-* API Integration
-* Full Stack Development
+* Backend Integration
+* User Authentication
+* AWS Deployment
+* Advanced Analytics
+* Team Collaboration Features
+
+## Author
+
+Lia Aleen Irshad
