@@ -109,3 +109,29 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+body.light {
+
+  background-color: white;
+
+  color: black;
+}
+
+body.dark {
+
+  background-color: #121212;
+
+  color: white;
+}
+
+body.dark a {
+
+  color: #90caf9;
+}
+
+body.dark .card {
+
+  background-color: #1f1f1f;
+
+  border-color: #444;
+}

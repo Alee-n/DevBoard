@@ -5,17 +5,68 @@ import {
 } from "react-router-dom";
 import Tasks from "./pages/Tasks";
 import Navbar from "./components/Navbar";
-import Users from "./pages/Users";
+import Learning from "./pages/Learning";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import ProfilePage from "./pages/ProfilePage";
+import Projects from "./pages/Projects";
+import { useState, useEffect } from "react";
+import ThemeToggle from "./components/ThemeToggle";
+
+
+
 function App() {
+
+  const [darkMode, setDarkMode] =
+    useState(false);
+
+  useEffect(() => {
+
+    const savedTheme =
+        localStorage.getItem("theme");
+
+    if (savedTheme === "dark") {
+
+        setDarkMode(true);
+    }
+
+  }, []);
+
+  useEffect(() => {
+
+    document.body.className =
+        darkMode
+            ? "dark"
+            : "light";
+
+    localStorage.setItem(
+        "theme",
+        darkMode
+            ? "dark"
+            : "light"
+    );
+
+  }, [darkMode]);
+
+  function toggleTheme() {
+
+    setDarkMode(
+        !darkMode
+    );
+  }
 
   return (
     <BrowserRouter>
+      
+      <ThemeToggle
+        darkMode={darkMode}
+        toggleTheme={toggleTheme}
+      />
 
       <Navbar />
+
+      
 
       <Routes>
 
@@ -35,8 +86,8 @@ function App() {
         />
 
         <Route
-          path="/users"
-        element={<Users />}
+          path="/learning"
+        element={<Learning />}
         />
 
         <Route
@@ -47,6 +98,11 @@ function App() {
         <Route
           path="/profile"
             element={<ProfilePage />}
+        />
+
+        <Route
+          path="/projects"
+          element={<Projects />}
         />
 
       </Routes>
