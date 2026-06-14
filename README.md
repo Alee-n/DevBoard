@@ -1,28 +1,29 @@
 # DevBoard
 
-A React + TypeScript productivity dashboard built while learning modern frontend development.
+A React + TypeScript productivity dashboard built while learning modern frontend development and preparing for the HENNGE Global Internship.
 
 ## Features
 
-- Dashboard
-- Task Manager
-- User Page
-- Profile Page
-- React Router
-- TypeScript
-- Local Storage
-- Reusable Components
+* Dashboard
+* Profile Page
+* Task Manager
+* Users Page
+* React Router Navigation
+* TypeScript Interfaces
+* Local Storage Persistence
+* Reusable Components
 
 ## Tech Stack
 
-- React
-- TypeScript
-- Vite
+* React
+* TypeScript
+* Vite
 
-## Learning Goals
+## Learning Objectives
 
-- React Fundamentals
-- Component Architecture
-- TypeScript
-- API Integration
-- Full Stack Development
+* React Fundamentals
+* TypeScript
+* Component Architecture
+* State Management
+* API Integration
+* Full Stack Development

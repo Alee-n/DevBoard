@@ -7,6 +7,7 @@ interface ProfileData {
     goal: string;
     skills: string[];
 }
+
 function ProfilePage() {
 
     const [profile, setProfile] =
