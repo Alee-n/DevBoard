@@ -146,3 +146,51 @@ a {
 
   max-width: 90%;
 }
+
+.priority-high {
+
+  background: #ff5252;
+  color: white;
+}
+
+.priority-medium {
+
+  background: #ffb300;
+  color: white;
+}
+
+.priority-low {
+
+  background: #4caf50;
+  color: white;
+}
+
+.priority-badge {
+
+  padding: 4px 8px;
+
+  border-radius: 12px;
+
+  margin-right: 10px;
+
+  font-size: 12px;
+}
+
+.theme-toggle {
+
+  position: fixed;
+
+  top: 20px;
+
+  right: 20px;
+
+  padding: 10px 14px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font-size: 14px;
+}

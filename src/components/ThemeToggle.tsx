@@ -11,6 +11,7 @@ function ThemeToggle({
     return (
 
         <button
+            className="theme-toggle"
             onClick={toggleTheme}
         >
             {darkMode

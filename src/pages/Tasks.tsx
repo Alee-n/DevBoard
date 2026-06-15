@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 type Task = {
+    id: number;
     text: string;
     category: string;
     priority: string;
@@ -9,30 +10,32 @@ type Task = {
 
 function Tasks() {
 
-    const [task, setTask] =
-        useState("");
-
-    const [category, setCategory] =
-        useState("");
-    
-    const [priority, setPriority] =
-        useState("Medium");
-
-    const [search, setSearch] =
-        useState("");
-
-    const [tasks, setTasks] =
-        useState<Task[]>([]);
+    const [task, setTask] = useState("");
+    const [category, setCategory] = useState("");
+    const [priority, setPriority] = useState("Medium");
+    const [search, setSearch] = useState("");
+    const [tasks, setTasks] = useState<Task[]>([]);
 
     useEffect(() => {
 
-        const savedTasks =
-            localStorage.getItem("tasks");
+        try {
 
-        if (savedTasks) {
+            const savedTasks =
+                localStorage.getItem("tasks");
 
-            setTasks(
-                JSON.parse(savedTasks)
+            if (savedTasks) {
+
+                const parsedTasks =
+                    JSON.parse(savedTasks);
+
+                setTasks(parsedTasks);
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Failed to load tasks",
+                error
             );
         }
 
@@ -40,10 +43,20 @@ function Tasks() {
 
     useEffect(() => {
 
-        localStorage.setItem(
-            "tasks",
-            JSON.stringify(tasks)
-        );
+        try {
+
+            localStorage.setItem(
+                "tasks",
+                JSON.stringify(tasks)
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Failed to save tasks",
+                error
+            );
+        }
 
     }, [tasks]);
 
@@ -56,40 +69,59 @@ function Tasks() {
             return;
         }
 
-        setTasks([
-            ...tasks,
-            {
-                text: task,
-                category: category,
-                priority: priority,
-                completed: false
-            }
-        ]);
+        const newTask: Task = {
+
+            id: Date.now(),
+
+            text: task,
+
+            category: category,
+
+            priority: priority,
+
+            completed: false
+        };
+
+        setTasks(
+            [...tasks, newTask]
+        );
 
         setTask("");
         setCategory("");
+        setPriority("Medium");
     }
 
-    function deleteTask(indexToDelete: number) {
+    function deleteTask(id: number) {
 
-        const updatedTasks =
+        setTasks(
+
             tasks.filter(
-                (_, index) =>
-                    index !== indexToDelete
-            );
+                task =>
+                    task.id !== id
+            )
 
-        setTasks(updatedTasks);
+        );
     }
 
-    function toggleComplete(index: number) {
+    function toggleComplete(id: number) {
 
-        const updatedTasks =
-            [...tasks];
+        setTasks(
 
-        updatedTasks[index].completed =
-            !updatedTasks[index].completed;
+            tasks.map(task =>
 
-        setTasks(updatedTasks);
+                task.id === id
+
+                    ? {
+                        ...task,
+                        completed:
+                            !task.completed
+                    }
+
+                    : task
+
+            )
+
+        );
     }
 
     const completedTasks =
@@ -103,11 +135,13 @@ function Tasks() {
 
     const filteredTasks =
         tasks.filter(task =>
+
             task.text
                 .toLowerCase()
                 .includes(
                     search.toLowerCase()
                 )
+
         );
 
     return (
@@ -131,8 +165,7 @@ function Tasks() {
                     }
                 />
 
-                <br />
-                <br />
+                <br /><br />
 
                 <input
                     type="text"
@@ -145,28 +178,22 @@ function Tasks() {
                     }
                 />
 
+                <br /><br />
+
                 <select
                     value={priority}
                     onChange={(e) =>
-                        setPriority(e.target.value)
+                        setPriority(
+                            e.target.value
+                        )
                     }
-                    >
-                    <option>
-                        High
-                    </option>
-
-                    <option>
-                        Medium
-                    </option>
-
-                    <option>
-                        Low
-                    </option>
-
+                >
+                    <option>High</option>
+                    <option>Medium</option>
+                    <option>Low</option>
                 </select>
 
-                <br />
-                <br />
+                <br /><br />
 
                 <button
                     onClick={addTask}
@@ -181,32 +208,26 @@ function Tasks() {
                 <h3>Statistics</h3>
 
                 <p>
-                    Total Tasks:
-                    {" "}
-                    {tasks.length}
+                    Total Tasks: {tasks.length}
                 </p>
 
                 <p>
-                    Completed:
-                    {" "}
-                    {completedTasks}
+                    Completed: {completedTasks}
                 </p>
 
                 <p>
-                    Pending:
-                    {" "}
-                    {pendingTasks}
+                    Pending: {pendingTasks}
                 </p>
 
             </div>
 
             <div className="card">
 
-                <h3>Search</h3>
+                <h3>Search Tasks</h3>
 
                 <input
                     type="text"
-                    placeholder="Search Tasks"
+                    placeholder="Search..."
                     value={search}
                     onChange={(e) =>
                         setSearch(
@@ -221,16 +242,21 @@ function Tasks() {
 
                 <h3>Tasks</h3>
 
-                <ul>
+                <ul
+                    style={{
+                        listStyle: "none",
+                        padding: 0
+                    }}
+                >
 
                     {filteredTasks.map(
-                        (
-                            item,
-                            index
-                        ) => (
+                        (item) => (
 
                             <li
-                                key={index}
+                                key={item.id}
+                                style={{
+                                    marginBottom: "10px"
+                                }}
                             >
 
                                 <span
@@ -249,7 +275,9 @@ function Tasks() {
                                     {" | "}
 
                                     {item.category}
+
                                     {" | "}
+
                                     {item.priority}
 
                                 </span>
@@ -259,7 +287,7 @@ function Tasks() {
                                 <button
                                     onClick={() =>
                                         toggleComplete(
-                                            index
+                                            item.id
                                         )
                                     }
                                 >
@@ -271,7 +299,7 @@ function Tasks() {
                                 <button
                                     onClick={() =>
                                         deleteTask(
-                                            index
+                                            item.id
                                         )
                                     }
                                 >
