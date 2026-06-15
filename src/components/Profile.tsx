@@ -1,119 +1,26 @@
-function Projects() {
 
-  const projects = [
 
-      {
-          name: "FocusFlow",
+type ProfileProps = {
+    name: string;
+    goal: string;
+};
 
-          status: "Completed",
+function Profile({
+    name,
+    goal
+}: ProfileProps) {
 
-          description:
-              "AI-powered productivity planner with Flask, PostgreSQL, JWT authentication, Docker and CI/CD.",
+    return (
 
-          tech: [
-              "Flask",
-              "PostgreSQL",
-              "JWT",
-              "Docker",
-              "Pytest"
-          ],
+        <div className="card">
 
-          github:
-              "https://github.com/Alee-n/FocusFlow"
-      },
+            <h2>{name}</h2>
 
-      {
-          name: "DevBoard",
+            <p>{goal}</p>
 
-          status: "In Progress",
+        </div>
 
-          description:
-              "Developer learning dashboard built with React and TypeScript.",
-
-          tech: [
-              "React",
-              "TypeScript",
-              "Vite"
-          ],
-
-          github:
-              "https://github.com/Alee-n/DevBoard"
-      }
-
-  ];
-
-  return (
-
-      <div className="page">
-
-          <h1>Projects</h1>
-
-          {projects.map(
-              (project, index) => (
-
-                  <div
-                      key={index}
-                      className="card project-card"
-                  >
-
-                      <h2>
-                          {project.name}
-                      </h2>
-
-                      <p>
-                          {project.description}
-                      </p>
-
-                      <p>
-
-                          <strong>
-                              Status:
-                          </strong>
-
-                          {" "}
-
-                          {project.status}
-
-                      </p>
-
-                      <div>
-
-                          {project.tech.map(
-                              (
-                                  tech,
-                                  techIndex
-                              ) => (
-
-                                  <span
-                                      key={techIndex}
-                                      className="badge"
-                                  >
-                                      {tech}
-                                  </span>
-
-                              )
-                          )}
-
-                      </div>
-
-                      <br />
-
-                      <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noreferrer"
-                      >
-                          View GitHub
-                      </a>
-
-                  </div>
-
-              )
-          )}
-
-      </div>
-
-  );
+    );
 }
 
-export default Projects;
+export default Profile;
